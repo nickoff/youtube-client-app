@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import './app/styles/_fonts.scss';
+@import './app/styles/_variables.scss';
+
+* {	box-sizing: border-box; }
+html, body { height: auto; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,48 @@
+p {
+  color: #4F4F4F;
+  text-align: right;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  padding-right: 8px;
+}
+
+.login {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .login-button {
+    color: #2F80ED;
+  }
+
+  .logout-button {
+    color: #FF0000;
+  }
+
+  button{
+    display: flex;
+    align-items: center;
+    border: none;
+    background: transparent;
+    width: fit-content;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  .mat-icon {
+    height: 24px;
+    width: 24px;
+    filter: drop-shadow(2px 2px 4px #2F80ED40);
+
+    &:hover {
+      filter: none;
+    }
+  }
+
+  a {
+    display: flex;
+  }
+}

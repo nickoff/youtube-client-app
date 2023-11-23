@@ -1,0 +1,21 @@
+<div class="login">
+  <h2 class="login--title">Login</h2>
+  <form [formGroup]="credentials" (ngSubmit)="onSubmit()" class="login--form">
+    <div class="input-label">
+      <label for="email">login</label>
+      <span class="login--form-error" *ngIf="isShowEmailError">{{emailErrors}}</span>
+    </div>
+    <input formControlName="email" id="email" type="email" placeholder="Enter email">
+    <div class="input-label">
+      <label for="password">password</label>
+      <span class="login--form-error" *ngIf="isShowPasswordError">{{passwordErrors}}</span>
+    </div>
+    <input formControlName="password" id="password" type="password" placeholder="Enter password">
+    <div class="input-label">
+      <ul class="login--form-error" *ngIf="isShowNonRequiredPasswordErrors">
+        <li *ngFor="let errorKey of errorKeys">{{nonRequiredPasswordError?.[errorKey]}}</li>
+      </ul>
+      <app-button type="submit" class="login--form-button">Login</app-button>
+    </div>
+  </form>
+</div>

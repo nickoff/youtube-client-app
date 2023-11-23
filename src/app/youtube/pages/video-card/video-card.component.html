@@ -1,0 +1,19 @@
+<div *ngIf="item" class="video-card">
+  <button (click)="back()" appDateStatusColor [selectorName]="backgroundColor" [timeDiffMs]="ageInMs">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <div class="video-card--conteiner">
+    <img src={{item.snippet.thumbnails.maxres.url}} alt="video thumbnails">
+    <div class="video-card--content" appDateStatusColor [selectorName]="borderColor" [timeDiffMs]="ageInMs">
+      <div class="video-card--title">
+        <h3>{{item.snippet.title}}</h3>
+        <span>{{item.snippet.publishedAt | date: 'fullDate'}}</span>
+      </div>
+      <h4 class="video-card--title-description">Description:</h4>
+      <p class="video-card--description">{{item.snippet.description}}</p>
+      <div class="video-card--info">
+        <span *ngFor="let action of actions"><mat-icon>{{action.name}}</mat-icon>{{action.count}}</span>
+      </div>
+    </div>
+  </div>
+</div>

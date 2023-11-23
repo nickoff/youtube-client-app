@@ -1,0 +1,146 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-color);
+  max-width: 350px;
+  margin: 45px auto;
+  padding: 27px 20px;
+  font-style: normal;
+  line-height: normal;
+  border-radius: 5px;
+
+  &--title {
+    width: 100%;
+    color: #000000;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 700;
+    text-align: start;
+    margin-bottom: 5px;
+  }
+
+  &--form-button {
+    margin-top: 20px;
+  }
+
+  &--form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    label {
+      display: block;
+      font-size: 10px;
+      color: var(--gray-color);
+      padding-left: 5px;
+      margin-bottom: 4px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      background-color: var(--background-color-input);
+;
+      border: none;
+      font-size: 12px;
+      color: #000000;
+      padding: 12px 9px;
+      margin-bottom: 5px;
+      border: solid 1px transparent;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder{
+        color: #929292;
+        font-size: 10px;
+      }
+
+      &.ng-valid.ng-dirty {
+        border: solid 1px var(--valid-color-input);
+      }
+
+      &.ng-invalid.ng-dirty.ng-touched {
+        border: solid 1px var(--invalid-color-input);
+      }
+    }
+
+    .input-label {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--invalid-color-input);
+    }
+  }
+
+  form.ng-submitted {
+    input.ng-invalid {
+      border: solid 1px var(--invalid-color-input);
+    }
+  }
+}
+
+.tags {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+
+  .tag{
+    font-size: 10px;
+    width: 100%;
+  
+    input {
+      border: none;
+      width: 100%;
+      padding: 5px 10px;
+      text-align: center;
+      margin: 0;
+  
+      &.ng-valid.ng-dirty.ng-touched {
+        color: var(--white-color);
+        font-weight: 700;
+        background-color: var(--gray-color);
+        border-radius: 3px;
+      }
+
+      &.ng-invalid.ng-dirty {
+        border: solid 1px var(--invalid-color-input);
+      }
+    }
+  }
+}
+
+
+
+.tags-button {
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    padding: 5px;
+    color: var(--white-color);
+    box-shadow: 2.51599px 0px 5.03198px 0px var(--primary-color);
+    cursor: pointer;
+  
+    &:hover {
+      box-shadow: none;
+      transition: all 0.5s;
+      background-color: var(--primary-color);
+    }
+
+}

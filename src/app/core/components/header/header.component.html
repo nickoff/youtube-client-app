@@ -1,0 +1,19 @@
+<header>
+  <div class="header-wrapper">
+    <div class="header-container">
+      <div class="search-container">
+        <app-logo></app-logo>
+        <app-search-input></app-search-input>
+        <app-search-settings (buttonClick)="showComponent = !showComponent"></app-search-settings>
+      </div>
+      <app-login-icon class="header-login"></app-login-icon>
+    </div>
+    <div *ngIf="showComponent" class="search-settings">
+      <span>Sorting by:</span>
+      <button (click)="sortData()">date</button>
+      <button (click)="sortCountOfView()">count of views</button>
+      <button (click)="sortByWord()">by word or sentance</button>
+      <input [(ngModel)]="inputValue" type="text">
+    </div>
+  </div>
+</header>

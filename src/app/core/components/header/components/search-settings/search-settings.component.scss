@@ -1,0 +1,26 @@
+:host {
+  width: 24px;
+  height: 24px;
+  $primary-color: #2F80ED;
+
+  button {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: 0 solid transparent;
+    border-radius: 5px;
+    box-shadow: 2px 0px 4px 0px $primary-color;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: none;
+      transition: 0.5s all;
+    }
+  }
+}
+
+
+
+

@@ -1,0 +1,10 @@
+<div class="login">
+  <p>{{loginName}}</p>
+  <a routerLink="auth/admin"><mat-icon svgIcon="login-icon" aria-hidden="true" aria-label="login SVG icon"></mat-icon></a>
+  <button class="logout-button" *ngIf="isLogout"  (click)="onLogout()" mat-icon-button>
+    <mat-icon>logout</mat-icon>
+  </button>
+  <button class="login-button" *ngIf="!isLogout"  (click)="onLogin()" mat-icon-button>
+    <mat-icon>login</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,44 @@
+<div class="admin">
+  <h2 class="admin--title">Create new card</h2>
+  <form  [formGroup]="dataNewCard" (ngSubmit)="onSubmit()" class="admin--form">
+    <div class="input-label">
+      <label for="title">Title</label>
+      <span class="login--form-error" *ngIf="isShowTitleError">{{titleErrors}}</span>
+    </div>
+    <input formControlName="title" id="title" type="text" placeholder="Enter title">
+    <div class="input-label">
+      <label for="description">Description</label>
+      <span class="login--form-error" *ngIf="isShowDescriptionError">{{descriptionErrors}}</span>
+    </div>
+    <input formControlName="description" id="description" type="text" placeholder="Enter description">
+    <div class="input-label">
+      <label for="img">Img</label>
+      <span class="login--form-error" *ngIf="isShowImgError">{{imgErrors}}</span>
+    </div>
+    <input formControlName="img" id="img" type="text" placeholder="Enter https link to image">
+    <div class="input-label">
+      <label for="link-video">Link video</label>
+      <span class="login--form-error" *ngIf="isShowLinkVideoError">{{linkVideoErrors}}</span>
+    </div>
+    <input formControlName="linkVideo" id="link-video" type="text" placeholder="Enter https link to video">
+    <div class="input-label">
+      <label for="creationDate">Creation date</label>
+      <span class="login--form-error" *ngIf="isShowCreationDateError">{{creationDateErrors}}</span>
+    </div>
+    <input formControlName="creationDate" id="creationDate" type="date">
+    <div class="input-label">
+      <label for="tags">Creation tags</label>
+      <span class="login--form-error" *ngIf="isShowTagsError">{{tagsError}}</span>
+    </div>
+    <div class="tags">
+      <div class="tag" formArrayName="tags" *ngFor="let tag of tags.controls; let i = index">
+        <input [formControlName]="i" type="text" placeholder="Enter text to tag">
+      </div>
+    </div>
+    <button *ngIf="isShowTagsAddButton" class="tags-button" (click)="addTag()" type="button">add tag</button>
+    <div class="input-label">
+      <app-button type="submit" class="admin--form-button">Create card</app-button>
+      <app-button (click)="onReset()" type="button" class="admin--form-button">Reset form</app-button>
+    </div>
+  </form>
+</div>

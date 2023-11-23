@@ -1,0 +1,26 @@
+:host {
+
+  max-width: 100%;
+}
+
+.not-found-page{
+  display: flex;
+  align-items: center;
+  max-width: 360px;
+  margin: 15% auto 0 auto;
+
+  p {
+    max-width: 233px;
+    margin: 0;
+    font-size: 24px;
+    color: #828282;
+    font-weight: 700;
+    margin: 0 0 10px 22px;
+    line-height: normal;
+  }
+
+  mat-icon {
+    width: 100px;
+    height: 100px;
+  }
+}
