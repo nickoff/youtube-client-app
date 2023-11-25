@@ -31,6 +31,7 @@
     max-width: 223px;
     margin: 21px 0 0 0;
     padding: 0 10px 0 0;
+    
   }
 
   &-info {
@@ -64,5 +65,28 @@
     width: 100%;
     height: 123px;
     object-fit: cover;
+  }
+
+  &__button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .delete-icon-button {
+      cursor: pointer;
+      color: var(--invalid-color-input);
+    }
+
+    .favorite-icon-button {
+      cursor: pointer;
+      color: var(--gray-color);
+
+      &:hover {
+        color: #d9d935;
+        scale: 1.5;
+        transition: all 0.3s ease;
+      }
+    }
   }
 }

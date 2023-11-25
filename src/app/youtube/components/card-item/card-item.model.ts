@@ -5,7 +5,8 @@ export interface CardItemModel {
   isActions?: boolean;
   publishedAt: string;
   isCustomCard?: boolean;
-  statistics?: StatisticsModel <string>
+  statistics?: StatisticsModel <string>;
+  isFavorite?: boolean;
 }
 
 export type ActionModel = {

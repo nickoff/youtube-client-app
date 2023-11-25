@@ -5,7 +5,7 @@ const selectCustomCardStore = createFeatureSelector<CustomCardStateModel[]>('cus
 
 export const selectCustomCards = createSelector(
   selectCustomCardStore,
-  (state) => state
+  (state) => state.map(item => ({ ...item }))
 );
 
 export const selectIsLoadingCustomCardList = createSelector(

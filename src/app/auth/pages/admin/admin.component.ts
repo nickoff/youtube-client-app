@@ -6,6 +6,7 @@ import {
 import { Store } from '@ngrx/store';
 import * as AdminActions from 'src/app/redux/custom-card/custom-card.action';
 import { CustomCard } from 'src/app/redux/custom-card';
+import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { validateDateNotFuture } from '../../directives/validate-date-not-future.directive';
 import { AdminModel } from '../../models';
 import { AdminFormErrors } from '../../enums';
@@ -37,7 +38,7 @@ export class AdminComponent implements OnInit {
   creationDate!: FormControl;
   tags!: FormArray;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private navigateService: NavigateService) { }
 
   private initFormControls(): void {
     ({
@@ -117,6 +118,7 @@ export class AdminComponent implements OnInit {
         AdminActions.addCustomCard({ customCard: this.dataNewCard.value as CustomCard })
       );
       this.onReset();
+      this.navigateService.navigateToListPage();
     }
   }
 
