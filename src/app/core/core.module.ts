@@ -11,6 +11,7 @@ import { SearchInputComponent } from './components/header/components/search-inpu
 import { LogoComponent } from './components/header/components/logo/logo.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { ApiInterceptor } from './interceptors/api.interceptor';
+import { CoreComponent } from './core.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ApiInterceptor } from './interceptors/api.interceptor';
     LoginIconComponent,
     SearchSettingsComponent,
     SearchInputComponent,
+    CoreComponent,
   ],
   imports: [
     LogoComponent,
@@ -30,7 +32,7 @@ import { ApiInterceptor } from './interceptors/api.interceptor';
     HttpClientModule,
   ],
   exports: [
-    HeaderComponent
+    CoreComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }

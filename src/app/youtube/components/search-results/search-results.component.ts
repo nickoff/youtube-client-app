@@ -5,10 +5,11 @@ import {
 import { SortDateService } from 'src/app/youtube/services/sort-data/sort-data.service';
 import { SortByWordService } from 'src/app/youtube/services/sort-word/sort-by-word.service';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { selectVideosInfo } from 'src/app/redux/youtube/youtube.selector';
-import { CardItem } from '../../models';
 import { SortCountOfViewService } from '../../services/sort-count-of-view/sort-count-of-view.service';
+import { CardItemModel } from '../card-item/card-item.model';
+import { CardItem } from '../../models';
 
 @Component({
   selector: 'app-search-results',
@@ -16,7 +17,7 @@ import { SortCountOfViewService } from '../../services/sort-count-of-view/sort-c
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent implements OnInit {
-  items$?: Observable<CardItem[]>;
+  items$?: Observable<CardItemModel[]>;
   sortDateOrder = this.sortDateService.sortDateOrder$;
   sortCountOfViewOrder = this.sortCountOfViewService.sortCountOfViewOrder$;
   inputData = this.sortByWordService.inputData$;
@@ -28,7 +29,19 @@ export class SearchResultsComponent implements OnInit {
     private store: Store
   ) { }
 
+  // eslint-disable-next-line class-methods-use-this
+  private transformDate = (item: CardItem): CardItemModel => ({
+    id: item.id,
+    image: item.snippet.thumbnails.medium.url,
+    title: item.snippet.title,
+    publishedAt: item.snippet.publishedAt,
+    isCustomCard: false,
+    isActions: true,
+    statistics: item.statistics
+  });
   ngOnInit(): void {
-    this.items$ = this.store.select(selectVideosInfo);
+    this.items$ = this.store.select(selectVideosInfo).pipe(
+      map(items => items.map(this.transformDate))
+    );
   }
 }

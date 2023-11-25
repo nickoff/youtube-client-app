@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Order } from 'src/app/shared/enums/order.enum';
-import { CardItem } from '../../models';
+import { CardItemModel } from '../../components/card-item/card-item.model';
 
 @Pipe({
   name: 'sortByDate'
@@ -8,10 +8,10 @@ import { CardItem } from '../../models';
 
 export class SortByDatePipe implements PipeTransform {
   // eslint-disable-next-line class-methods-use-this
-  transform(array: CardItem[], order:Order | null = Order.desc): CardItem[] {
-    array.sort((a: CardItem, b: CardItem) => {
-      const currentTime = new Date(a.snippet.publishedAt);
-      const nextTime = new Date(b.snippet.publishedAt);
+  transform(array: CardItemModel[], order:Order | null = Order.desc): CardItemModel[] {
+    array.sort((a: CardItemModel, b: CardItemModel) => {
+      const currentTime = new Date(a.publishedAt);
+      const nextTime = new Date(b.publishedAt);
       return order === Order.asc
         ? currentTime.getTime() - nextTime.getTime()
         : nextTime.getTime() - currentTime.getTime();

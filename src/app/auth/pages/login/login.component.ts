@@ -6,7 +6,7 @@ import {
   Validators
 } from '@angular/forms';
 import { TOKEN_KEY, TOKEN_VALUE } from 'src/app/core/components/header/constants/auth-constatnt';
-import { NavigateService } from 'src/app/core/sevices/navigate/navigate.service';
+import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { AuthStateService } from '../../services/auth-state.service';
 import { validatePasswordStrength } from '../../directives/validate-password.directive';
 import { CredentialsModel } from '../../models';
@@ -70,8 +70,8 @@ export class LoginComponent implements OnInit {
   getShowNonRequiredPasswordErrors(): boolean {
     return this.password.errors !== null
       && this.password.errors
-        && !this.password.errors[AuthPasswordErrors.required]
-        && this.password.dirty;
+      && !this.password.errors[AuthPasswordErrors.required]
+      && this.password.dirty;
   }
 
   getPasswordErrors(): string {

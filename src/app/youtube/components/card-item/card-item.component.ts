@@ -1,12 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { NavigateService } from 'src/app/core/sevices/navigate/navigate.service';
-import { CardItem } from '../../models';
+import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { SelectorName } from '../../directives/date-status-color.directive';
-
-type ActionModel = {
-  name: string;
-  count: string;
-};
+import { ActionModel, CardItemModel } from './card-item.model';
 
 @Component({
   selector: 'app-card-item',
@@ -22,12 +17,12 @@ export class CardItemComponent implements OnChanges {
     private navigateService: NavigateService,
   ) { }
 
-  @Input() item?: CardItem;
-  @Input() actions: ActionModel[] = [];
+  @Input() item?: CardItemModel;
+  @Input() actions?: ActionModel[];
 
   ngOnChanges(): void {
-    if (this.item && this.item.snippet && this.item.snippet.publishedAt) {
-      this.ageInMs = Date.now() - Date.parse(this.item.snippet.publishedAt);
+    if (this.item && this.item && this.item.publishedAt) {
+      this.ageInMs = Date.now() - Date.parse(this.item.publishedAt);
     }
 
     if (!this.item || !this.item.statistics) return;

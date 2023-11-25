@@ -7,7 +7,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthStateService } from 'src/app/auth/services/auth-state.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigateService } from 'src/app/core/sevices/navigate/navigate.service';
+import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { LOGIN_ICON } from '../../constants/svg-icon';
 import { TOKEN_KEY } from '../../constants/auth-constatnt';
 

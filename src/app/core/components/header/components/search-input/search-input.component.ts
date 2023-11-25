@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject, debounceTime, filter } from 'rxjs';
-import { NavigateService } from 'src/app/core/sevices/navigate/navigate.service';
+import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { search } from 'src/app/redux/search/search.action';
 
 @Component({
@@ -28,6 +28,6 @@ export class SearchInputComponent {
   emitInputValue(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.searchSubject.next(target.value.toLowerCase().trim());
-    this.navigateService.navigateToSearch();
+    this.navigateService.navigateToListPage();
   }
 }

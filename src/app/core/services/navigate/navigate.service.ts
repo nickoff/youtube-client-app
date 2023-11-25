@@ -15,8 +15,8 @@ export class NavigateService {
     this.router.navigate(['']);
   }
 
-  navigateToSearch(): void {
-    this.router.navigate(['search']);
+  navigateToListPage(): void {
+    this.router.navigate(['list-page']);
   }
 
   navigateToVideo(id: string): void {

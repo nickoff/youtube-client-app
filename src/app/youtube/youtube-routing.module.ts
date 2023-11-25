@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { VideoCardComponent } from './pages/video-card/video-card.component';
+import { ListPageComponent } from './pages/list-page/list-page.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: '/search', pathMatch: 'full'
+    path: '', redirectTo: '/list-page', pathMatch: 'full'
   },
   {
-    path: 'search',
-    component: SearchResultsComponent
+    path: 'list-page',
+    component: ListPageComponent
   },
   {
     path: 'video/:id',

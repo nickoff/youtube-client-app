@@ -1,10 +1,12 @@
 <div *ngIf="item" appDateStatusColor [selectorName]="borderColor" [timeDiffMs]="ageInMs" class="card-item">
   <div class="card-item-content">
-    <img src={{item.snippet.thumbnails.medium.url}} alt={{item.snippet.title}}>
+    <img src={{item.image}} alt={{item.title}}>
     <div class="card-item-info">
-      <span *ngFor="let action of actions"><mat-icon>{{action.name}}</mat-icon>{{action.count}}</span>
+      <ng-container *ngIf="item.isActions">
+        <span *ngFor="let action of actions"><mat-icon>{{action.name}}</mat-icon>{{action.count}}</span>
+      </ng-container>
     </div>
-    <p class="card-item-title">{{item.snippet.title}}</p>
+    <p class="card-item-title">{{item.title}}</p>
   </div>
   <app-button class="card-item-button" (click)="openVideoCard(item.id)">more...</app-button>
 </div>
