@@ -31,7 +31,8 @@ export class SearchResultsComponent implements OnInit {
 
   private transformDate = (item: CardItem): CardItemModel => ({
     id: item.id,
-    image: item.snippet.thumbnails.maxres.url,
+    image: item.snippet.thumbnails.high.url,
+    imageHigh: item.snippet.thumbnails.maxres?.url,
     title: item.snippet.title,
     publishedAt: item.snippet.publishedAt,
     description: item.snippet.description,

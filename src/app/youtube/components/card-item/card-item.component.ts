@@ -2,18 +2,22 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { Store } from '@ngrx/store';
 import { deleteCustomCard } from 'src/app/redux/custom-card';
+import { addFavoriteCard, deleteFavoriteCard } from 'src/app/redux/favorite-card/favorite-card.action';
+import { selectFavoriteCards } from 'src/app/redux/favorite-card/favorite-card.selector';
+import { Observable, map, take } from 'rxjs';
 import { SelectorName } from '../../directives/date-status-color.directive';
 import { ActionModel, CardItemModel } from '../../../shared/models/card-item.model';
 
 @Component({
   selector: 'app-card-item',
   templateUrl: './card-item.component.html',
-  styleUrls: ['./card-item.component.scss']
+  styleUrls: ['./card-item.component.scss'],
 })
 
 export class CardItemComponent implements OnChanges {
   ageInMs = 0;
   borderColor: SelectorName = 'borderColor';
+  isFavorite$: Observable<boolean> = new Observable();
 
   constructor(
     private navigateService: NavigateService,
@@ -40,6 +44,15 @@ export class CardItemComponent implements OnChanges {
       { name: 'heart_broken', count: dislikeCount },
       { name: 'question_answer', count: commentCount }
     ];
+
+    this.isFavorite$ = this.store.select(selectFavoriteCards).pipe(
+      map(favoriteCards => {
+        if (this.item) {
+          return favoriteCards.some(card => card.id === this.item?.id);
+        }
+        return false;
+      })
+    );
   }
 
   openVideoCard(id: string): void {
@@ -52,6 +65,13 @@ export class CardItemComponent implements OnChanges {
   }
 
   addToFavorites(): void {
-    console.log(this.item);
+    this.isFavorite$.pipe(take(1)).subscribe(isFavorite => {
+      if (!this.item) return;
+      if (isFavorite) {
+        this.store.dispatch(deleteFavoriteCard({ id: this.item.id }));
+      } else {
+        this.store.dispatch(addFavoriteCard({ favoriteCard: this.item }));
+      }
+    });
   }
 }

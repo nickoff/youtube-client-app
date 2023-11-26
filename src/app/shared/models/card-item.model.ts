@@ -1,6 +1,7 @@
 export interface CardItemModel {
   id: string;
   image: string;
+  imageHigh?: string;
   title: string;
   isActions?: boolean;
   description?: string;

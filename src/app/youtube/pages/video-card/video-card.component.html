@@ -3,7 +3,7 @@
     <mat-icon>arrow_back_ios</mat-icon>
   </button>
   <div class="video-card--conteiner">
-    <img src={{item.image}} alt="video thumbnails">
+    <img src={{item.imageHigh}} alt="video thumbnails">
     <div class="video-card--content" appDateStatusColor [selectorName]="borderColor" [timeDiffMs]="ageInMs">
       <div class="video-card--title">
         <h3>{{item.title}}</h3>
@@ -16,7 +16,7 @@
           <span *ngFor="let action of actions"><mat-icon>{{action.name}}</mat-icon>{{action.count}}</span>
         </div>
         <mat-icon class="delete-icon-button" *ngIf="item.isCustomCard" (click)="deleteCustomCard(item.id)">delete</mat-icon>
-        <mat-icon class="favorite-icon-button" *ngIf="!item.isCustomCard" (click)="addToFavorites()">star</mat-icon>
+        <mat-icon [ngClass]="{isfavoriteAction: isFavorite$ | async}" class="favorite-icon-button" *ngIf="!item.isCustomCard" (click)="addToFavorites()">star</mat-icon>
       </div>
     </div>
   </div>
