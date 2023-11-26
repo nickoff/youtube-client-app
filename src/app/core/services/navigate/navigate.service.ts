@@ -23,4 +23,12 @@ export class NavigateService {
   navigateToVideo(id: string, item: CardItemModel): void {
     this.router.navigate(['video', id], { state: { item } });
   }
+
+  navigateToFavorites(): void {
+    this.router.navigate(['favorites']);
+  }
+
+  navidateToAdmin(): void {
+    this.router.navigate(['auth', 'admin']);
+  }
 }

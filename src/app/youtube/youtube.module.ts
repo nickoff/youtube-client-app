@@ -35,7 +35,10 @@ import { CustomCardListComponent } from './components/custom-card-list/custom-ca
     SharedModule
   ],
   exports: [
-    SearchResultsComponent
+    CardItemComponent,
+    SortByDatePipe,
+    SortByCountOfViewPipe,
+    SortByWordPipe,
   ]
 })
 export class YoutubeModule { }

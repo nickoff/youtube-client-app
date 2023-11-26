@@ -14,6 +14,11 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: 'favorites',
+    loadChildren: () => import('./favorite/favorite.module').then(m => m.FavoriteModule),
+    canActivate: [authGuard]
+  },
+  {
     path: '',
     redirectTo: 'search',
     pathMatch: 'full',

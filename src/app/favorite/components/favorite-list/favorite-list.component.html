@@ -1,0 +1,9 @@
+<ng-container *ngIf="items$ | async as items">
+  <app-card-item 
+    *ngFor="let item of items 
+    | sortByDate: (sortDateOrder | async) 
+    | sortByCountOfView : (sortCountOfViewOrder | async) 
+    | sortByWord : (inputData | async)" [item]="item"
+  ></app-card-item>
+</ng-container>
+

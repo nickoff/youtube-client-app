@@ -16,8 +16,11 @@ header {
 
 .header-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
 }
 
 .search-container {
@@ -57,7 +60,17 @@ header {
   }
 }
 
-.header-login {
-  position: absolute;
-  right: 13%;
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  a {
+    text-decoration: none;
+  }
+
+  .active-link {
+    color: #2F80ED;
+    text-decoration: underline;
+  }
 }

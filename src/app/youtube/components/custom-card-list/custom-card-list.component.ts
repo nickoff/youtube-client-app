@@ -29,6 +29,7 @@ export class CustomCardListComponent implements OnInit {
   private transformDate = (item: CustomCardStateModel): CardItemModel => ({
     id: item.id,
     image: item.customCard.img,
+    imageHigh: item.customCard.img,
     title: item.customCard.title,
     publishedAt: item.customCard.creationDate,
     isCustomCard: true,

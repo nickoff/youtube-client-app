@@ -1,6 +1,11 @@
 <header>
   <div class="header-wrapper">
     <div class="header-container">
+      <nav class="header-nav">
+        <a routerLink="list-page" routerLinkActive="active-link">Main</a>
+        <a routerLink="favorites" routerLinkActive="active-link">Favorites</a>
+        <a routerLink="auth/admin" routerLinkActive="active-link">Admin</a>
+      </nav>
       <div class="search-container">
         <app-logo></app-logo>
         <app-search-input></app-search-input>
