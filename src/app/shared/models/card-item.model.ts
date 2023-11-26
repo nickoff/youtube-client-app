@@ -3,8 +3,9 @@ export interface CardItemModel {
   image: string;
   title: string;
   isActions?: boolean;
+  description?: string;
   publishedAt: string;
-  isCustomCard?: boolean;
+  isCustomCard: boolean;
   statistics?: StatisticsModel <string>;
   isFavorite?: boolean;
 }

@@ -11,6 +11,6 @@
   <div class="card-item__button-container">
     <app-button class="card-item-button" (click)="openVideoCard(item.id)">more...</app-button>
     <mat-icon class="delete-icon-button" *ngIf="item.isCustomCard" (click)="deleteCustomCard(item.id)">delete</mat-icon>
-    <mat-icon class="favorite-icon-button" *ngIf="!item.isCustomCard" (click)="deleteCustomCard(item.id)">star</mat-icon>
+    <mat-icon class="favorite-icon-button" *ngIf="!item.isCustomCard" (click)="addToFavorites()">star</mat-icon>
   </div>
 </div>

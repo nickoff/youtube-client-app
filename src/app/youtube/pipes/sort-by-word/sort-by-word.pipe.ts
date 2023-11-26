@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CardItemModel } from '../../components/card-item/card-item.model';
+import { CardItemModel } from '../../../shared/models/card-item.model';
 
 @Pipe({
   name: 'sortByWord'

@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { selectVideosInfo } from 'src/app/redux/youtube/youtube.selector';
 import { SortCountOfViewService } from '../../services/sort-count-of-view/sort-count-of-view.service';
-import { CardItemModel } from '../card-item/card-item.model';
+import { CardItemModel } from '../../../shared/models/card-item.model';
 import { CardItem } from '../../models';
 
 @Component({
@@ -29,12 +29,12 @@ export class SearchResultsComponent implements OnInit {
     private store: Store
   ) { }
 
-  // eslint-disable-next-line class-methods-use-this
   private transformDate = (item: CardItem): CardItemModel => ({
     id: item.id,
-    image: item.snippet.thumbnails.medium.url,
+    image: item.snippet.thumbnails.maxres.url,
     title: item.snippet.title,
     publishedAt: item.snippet.publishedAt,
+    description: item.snippet.description,
     isCustomCard: false,
     isActions: true,
     statistics: item.statistics

@@ -1,10 +1,9 @@
-/* eslint-disable class-methods-use-this */
 import { Component, Input, OnChanges } from '@angular/core';
 import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { Store } from '@ngrx/store';
 import { deleteCustomCard } from 'src/app/redux/custom-card';
 import { SelectorName } from '../../directives/date-status-color.directive';
-import { ActionModel, CardItemModel } from './card-item.model';
+import { ActionModel, CardItemModel } from '../../../shared/models/card-item.model';
 
 @Component({
   selector: 'app-card-item',
@@ -44,14 +43,15 @@ export class CardItemComponent implements OnChanges {
   }
 
   openVideoCard(id: string): void {
-    this.navigateService.navigateToVideo(id);
+    if (!this.item) return;
+    this.navigateService.navigateToVideo(id, this.item);
   }
 
   deleteCustomCard(id: string): void {
     this.store.dispatch(deleteCustomCard({ id }));
   }
 
-  addToFavorites(id: string): void {
-    console.log(id);
+  addToFavorites(): void {
+    console.log(this.item);
   }
 }
