@@ -7,9 +7,9 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
-import { TOKEN_KEY, TOKEN_VALUE } from 'src/app/core/components/header/constants/auth-constatnt';
-import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigateService } from '../../../core/services/navigate/navigate.service';
+import { TOKEN_KEY, TOKEN_VALUE } from '../../../core/components/header/constants/auth-constatnt';
 import { AuthStateService } from '../../services/auth-state.service';
 import { validatePasswordStrength } from '../../services/validate-password.service';
 import { CredentialsModel } from '../../models';

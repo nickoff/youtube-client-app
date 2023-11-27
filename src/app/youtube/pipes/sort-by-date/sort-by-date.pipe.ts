@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Order } from 'src/app/shared/enums/order.enum';
+import { Order } from '../../../shared/enums/order.enum';
 import { CardItemModel } from '../../../shared/models/card-item.model';
 
 @Pipe({

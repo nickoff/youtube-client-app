@@ -5,10 +5,10 @@ import {
   FormArray, FormControl, FormGroup, Validators
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as AdminActions from 'src/app/redux/custom-card/custom-card.action';
 import { CustomCard } from 'src/app/redux/custom-card';
-import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigateService } from '../../../core/services/navigate/navigate.service';
+import * as AdminActions from '../../../redux/custom-card/custom-card.action';
 import { validateDateNotFuture } from '../../services/validate-date-not-future.service';
 import { AdminModel } from '../../models';
 import { AdminFormErrors } from '../../enums';

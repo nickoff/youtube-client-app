@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { TOKEN_KEY } from 'src/app/core/components/header/constants/auth-constatnt';
+import { TOKEN_KEY } from '../../core/components/header/constants/auth-constatnt';
 import { AuthState } from '../enums';
 
 @Injectable({
