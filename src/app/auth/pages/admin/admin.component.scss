@@ -1,3 +1,5 @@
+@import 'src/app/styles/variables';
+
 :host {
   display: block;
   width: 100%;
@@ -8,7 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--background-color);
+  background: $background-color;
   max-width: 350px;
   margin: 45px auto;
   padding: 27px 20px;
@@ -40,7 +42,7 @@
     label {
       display: block;
       font-size: 10px;
-      color: var(--gray-color);
+      color: $gray-color;
       padding-left: 5px;
       margin-bottom: 4px;
     }
@@ -48,7 +50,7 @@
     input {
       display: block;
       width: 100%;
-      background-color: var(--background-color-input);
+      background-color: $background-color-input;
 ;
       border: none;
       font-size: 12px;
@@ -67,11 +69,11 @@
       }
 
       &.ng-valid.ng-dirty {
-        border: solid 1px var(--valid-color-input);
+        border: solid 1px $valid-color-input;
       }
 
       &.ng-invalid.ng-dirty.ng-touched {
-        border: solid 1px var(--invalid-color-input);
+        border: solid 1px $invalid-color-input;
       }
     }
 
@@ -81,13 +83,13 @@
       align-items: center;
       justify-content: space-between;
       font-size: 10px;
-      color: var(--invalid-color-input);
+      color: $invalid-color-input;
     }
   }
 
   form.ng-submitted {
     input.ng-invalid {
-      border: solid 1px var(--invalid-color-input);
+      border: solid 1px $invalid-color-input;
     }
   }
 }
@@ -112,14 +114,14 @@
       margin: 0;
   
       &.ng-valid.ng-dirty.ng-touched {
-        color: var(--white-color);
+        color: $white-color;
         font-weight: 700;
-        background-color: var(--gray-color);
+        background-color: $gray-color;
         border-radius: 3px;
       }
 
       &.ng-invalid.ng-dirty {
-        border: solid 1px var(--invalid-color-input);
+        border: solid 1px $invalid-color-input;
       }
     }
   }
@@ -131,16 +133,16 @@
     margin-top: 15px;
     border: none;
     border-radius: 5px;
-    background-color: var(--primary-color);
+    background-color: $primary-color;
     padding: 5px;
-    color: var(--white-color);
-    box-shadow: 2.51599px 0px 5.03198px 0px var(--primary-color);
+    color: $white-color;
+    box-shadow: 2.51599px 0px 5.03198px 0px $primary-color;
     cursor: pointer;
   
     &:hover {
       box-shadow: none;
       transition: all 0.5s;
-      background-color: var(--primary-color);
+      background-color: $primary-color;
     }
 
 }

@@ -32,6 +32,31 @@ export class VideoCardComponent {
     private location: Location,
     private store: Store
   ) {
+    this.initComponent();
+  }
+
+
+  back(): void {
+    this.location.back();
+  }
+
+  deleteCustomCard(id: string): void {
+    this.store.dispatch(deleteCustomCard({ id }));
+    this.location.back();
+  }
+
+  addToFavorites(): void {
+    this.isFavorite$.pipe(take(1)).subscribe(isFavorite => {
+      if (!this.item) return;
+      if (isFavorite) {
+        this.store.dispatch(deleteFavoriteCard({ id: this.item.id }));
+      } else {
+        this.store.dispatch(addFavoriteCard({ favoriteCard: this.item }));
+      }
+    });
+  }
+
+  private initComponent(): void {
     const navigation = this.router.getCurrentNavigation();
     this.item = navigation?.extras.state?.['item'];
 
@@ -60,26 +85,5 @@ export class VideoCardComponent {
         return false;
       })
     );
-  }
-
-
-  back(): void {
-    this.location.back();
-  }
-
-  deleteCustomCard(id: string): void {
-    this.store.dispatch(deleteCustomCard({ id }));
-    this.location.back();
-  }
-
-  addToFavorites(): void {
-    this.isFavorite$.pipe(take(1)).subscribe(isFavorite => {
-      if (!this.item) return;
-      if (isFavorite) {
-        this.store.dispatch(deleteFavoriteCard({ id: this.item.id }));
-      } else {
-        this.store.dispatch(addFavoriteCard({ favoriteCard: this.item }));
-      }
-    });
   }
 }

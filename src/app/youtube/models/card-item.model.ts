@@ -1,10 +1,15 @@
-export interface CardItem {
+export interface CardItem<T = string> {
   kind: string;
   etag: string;
-  id: string;
+  id: T;
   snippet: Snippet;
-  statistics: Statistics;
+  statistics?: Statistics;
 }
+
+export type Id = {
+  kind: string;
+  videoId: string;
+};
 
 interface Snippet {
   publishedAt: string;

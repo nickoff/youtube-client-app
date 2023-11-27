@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { Subject, debounceTime, filter } from 'rxjs';
 import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
@@ -15,13 +16,17 @@ export class SearchInputComponent {
 
   constructor(
     private store: Store,
-    private navigateService: NavigateService
+    private navigateService: NavigateService,
+    private destroyRef: DestroyRef,
+    private cdr: ChangeDetectorRef
   ) {
     this.searchSubject.pipe(
       filter(query => query.length >= 3),
-      debounceTime(500)
+      debounceTime(500),
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe(searchQuery => {
       this.store.dispatch(search({ searchQuery }));
+      this.cdr.markForCheck();
     });
   }
 

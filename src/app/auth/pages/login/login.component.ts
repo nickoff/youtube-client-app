@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component, OnInit, ChangeDetectionStrategy, DestroyRef, ChangeDetectorRef
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,8 +9,9 @@ import {
 } from '@angular/forms';
 import { TOKEN_KEY, TOKEN_VALUE } from 'src/app/core/components/header/constants/auth-constatnt';
 import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthStateService } from '../../services/auth-state.service';
-import { validatePasswordStrength } from '../../directives/validate-password.directive';
+import { validatePasswordStrength } from '../../services/validate-password.service';
 import { CredentialsModel } from '../../models';
 import { AuthEmailErrors, AuthPasswordErrors } from '../../enums';
 import { ERROR_EMAIL_MESSAGE, ERROR_PASSWORD_MESSAGE } from '../../constants';
@@ -41,13 +44,17 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authStateService: AuthStateService,
-    private navigateService: NavigateService
+    private navigateService: NavigateService,
+    private destroyRef: DestroyRef,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    this.credentials.valueChanges.subscribe(() => {
-      this.refreshErrorsState();
-    });
+    this.credentials.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.refreshErrorsState();
+        this.cdr.markForCheck();
+      });
   }
 
   getShowEmailError(): boolean {

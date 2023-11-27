@@ -1,3 +1,5 @@
+@import 'src/app/styles/variables';
+
 .card-item {
   width: 100%;
   min-height: 327px;
@@ -75,12 +77,12 @@
 
     .delete-icon-button {
       cursor: pointer;
-      color: var(--invalid-color-input);
+      color: $invalid-color-input;
     }
 
     .favorite-icon-button {
       cursor: pointer;
-      color: var(--gray-color);
+      color: $gray-color;
 
       &:hover {
         color: #d9d935;

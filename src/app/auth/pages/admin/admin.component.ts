@@ -1,5 +1,6 @@
-/* eslint-disable class-methods-use-this */
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef, Component, DestroyRef, OnInit
+} from '@angular/core';
 import {
   FormArray, FormControl, FormGroup, Validators
 } from '@angular/forms';
@@ -7,7 +8,8 @@ import { Store } from '@ngrx/store';
 import * as AdminActions from 'src/app/redux/custom-card/custom-card.action';
 import { CustomCard } from 'src/app/redux/custom-card';
 import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
-import { validateDateNotFuture } from '../../directives/validate-date-not-future.directive';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { validateDateNotFuture } from '../../services/validate-date-not-future.service';
 import { AdminModel } from '../../models';
 import { AdminFormErrors } from '../../enums';
 import { ERROR_ADMIN_FORM_MESSAGE } from '../../constants';
@@ -38,18 +40,12 @@ export class AdminComponent implements OnInit {
   creationDate!: FormControl;
   tags!: FormArray;
 
-  constructor(private store: Store, private navigateService: NavigateService) { }
-
-  private initFormControls(): void {
-    ({
-      title: this.title,
-      description: this.description,
-      img: this.img,
-      linkVideo: this.linkVideo,
-      creationDate: this.creationDate,
-      tags: this.tags
-    } = this.dataNewCard.controls);
-  }
+  constructor(
+    private store: Store,
+    private navigateService: NavigateService,
+    private destroyRef: DestroyRef,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   isShowTitleError = false;
   isShowDescriptionError = false;
@@ -67,26 +63,30 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.initFormControls();
-    this.dataNewCard.valueChanges.subscribe(() => {
-      this.refreshErrorsState();
-    });
+    this.dataNewCard.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.refreshErrorsState();
+        this.cdr.markForCheck();
+      });
   }
 
   getShowError(formControl: FormControl | FormArray): boolean {
     return formControl.errors !== null
-    && formControl.errors && (formControl.dirty || this.isSubmitted);
+      && formControl.errors && (formControl.dirty || this.isSubmitted);
   }
 
   getShowTagsError(): boolean {
     return this.tags.invalid
-    && (this.tags.invalid && (this.tags.dirty || this.isSubmitted));
+      && (this.tags.invalid && (this.tags.dirty || this.isSubmitted));
   }
 
   getTitleError(): string | undefined {
     return (this.title.errors?.[AdminFormErrors.minlength]
       && ERROR_ADMIN_FORM_MESSAGE.minlength.title)
-    || (this.title.errors?.[AdminFormErrors.maxlength] && ERROR_ADMIN_FORM_MESSAGE.maxlength.title)
-    || (this.title.errors?.[AdminFormErrors.required] && ERROR_ADMIN_FORM_MESSAGE.required.title);
+      || (this.title.errors?.[AdminFormErrors.maxlength]
+      && ERROR_ADMIN_FORM_MESSAGE.maxlength.title)
+      || (this.title.errors?.[AdminFormErrors.required]
+      && ERROR_ADMIN_FORM_MESSAGE.required.title);
   }
 
   getDescriptionError(): string | undefined {
@@ -107,7 +107,7 @@ export class AdminComponent implements OnInit {
     return (this.creationDate.errors?.[AdminFormErrors.dateNotFuture]
       && ERROR_ADMIN_FORM_MESSAGE.dateNotFuture)
       || (this.creationDate.errors?.[AdminFormErrors.required]
-      && ERROR_ADMIN_FORM_MESSAGE.required.creationDate);
+        && ERROR_ADMIN_FORM_MESSAGE.required.creationDate);
   }
 
   onSubmit(): void {
@@ -161,5 +161,16 @@ export class AdminComponent implements OnInit {
     this.linkVideoErrors = this.getLinkVideoError();
     this.creationDateErrors = this.getCreationDateError();
     this.tagsError = ERROR_ADMIN_FORM_MESSAGE.required.tags;
+  }
+
+  private initFormControls(): void {
+    ({
+      title: this.title,
+      description: this.description,
+      img: this.img,
+      linkVideo: this.linkVideo,
+      creationDate: this.creationDate,
+      tags: this.tags
+    } = this.dataNewCard.controls);
   }
 }

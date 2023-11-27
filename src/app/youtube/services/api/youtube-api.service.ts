@@ -1,12 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import {
   CardItem,
-  SearchDirtyResponse,
+  Id,
   SearchResponse,
-  ShortCardItem
 } from '../../models';
 
 
@@ -20,38 +19,29 @@ export class YoutubeApiService {
   constructor(private http: HttpClient) { }
 
   getVideoIds(payload: string): Observable<string[]> {
-    return this.http.get<SearchDirtyResponse>(this.SEARCH_API, {
-      params: {
-        part: 'snippet',
-        maxResults: '12',
-        key: environment.API_TOKEN,
-        type: 'video',
-        q: payload,
-      }
-    }).pipe(
-      map(response => response.items),
-      map((items: ShortCardItem[]) => items.map(item => item.id.videoId))
+    const params = new HttpParams()
+      .set('part', 'snippet')
+      .set('maxResults', '12')
+      .set('key', environment.API_TOKEN)
+      .set('type', 'video')
+      .set('q', payload);
+
+    return this.http.get<SearchResponse<CardItem<Id>[]>>(this.SEARCH_API, { params }).pipe(
+      map((response: SearchResponse<CardItem<Id>[]>) => response.items.map(item => item.id.videoId))
     );
   }
 
   getVideosInfo(payload: string): Observable<CardItem[]> {
+    const params = new HttpParams()
+      .set('part', 'snippet,statistics')
+      .set('key', environment.API_TOKEN);
     return this.getVideoIds(payload)
-      .pipe(switchMap(ids => this.http.get<SearchResponse>(this.VIDEO_API, {
-        params: {
-          part: 'snippet,statistics',
-          key: environment.API_TOKEN,
-          id: ids.join(','),
-        }
-      })), map(response => response.items));
-  }
-
-  getVideoInfo(videoId: string): Observable<CardItem> {
-    return this.http.get<SearchResponse>(this.VIDEO_API, {
-      params: {
-        part: 'snippet,statistics',
-        key: environment.API_TOKEN,
-        id: videoId,
-      }
-    }).pipe(map(response => response.items[0]));
+      .pipe(
+        switchMap(ids => {
+          const paramsWithId = params.set('id', ids.join(','));
+          return this.http.get<SearchResponse>(this.VIDEO_API, { params: paramsWithId });
+        }),
+        map(response => response.items)
+      );
   }
 }
