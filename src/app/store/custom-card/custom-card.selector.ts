@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { CustomCardStateModel } from "./custom-card-state.model";
+import { CustomCardStateModel } from "./custom-card.state";
 
 const selectCustomCardStore = createFeatureSelector<CustomCardStateModel[]>('customCards');
 
@@ -10,8 +10,5 @@ export const selectCustomCards = createSelector(
 
 export const selectIsLoadingCustomCardList = createSelector(
   selectCustomCards,
-  (data) => {
-    if (data && data.length > 0) return true;
-    return false;
-  }
+  (data) => data?.length > 0
 );

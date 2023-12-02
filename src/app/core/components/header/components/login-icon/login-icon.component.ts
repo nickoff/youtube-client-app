@@ -23,6 +23,7 @@ const loginName = 'Your Name';
 })
 
 export class LoginIconComponent {
+  @Input() loginName: string = loginName;
   isLogout = false;
 
   constructor(
@@ -42,8 +43,6 @@ export class LoginIconComponent {
         this.cdr.markForCheck();
       });
   }
-
-  @Input() loginName: string = loginName;
 
   onLogout(): void {
     this.authStateService.logout();

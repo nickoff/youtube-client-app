@@ -12,11 +12,11 @@ import { SEARCH_SETTINGS_ICON } from '../../constants/svg-icon';
   styleUrls: ['./search-settings.component.scss']
 })
 export class SearchSettingsComponent {
+  @Output() buttonClick = new EventEmitter<void>();
+
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIconLiteral('search-settings-icon', sanitizer.bypassSecurityTrustHtml(SEARCH_SETTINGS_ICON));
   }
-
-  @Output() buttonClick = new EventEmitter<void>();
 
   showComponent(): void {
     this.buttonClick.emit();

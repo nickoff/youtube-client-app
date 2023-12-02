@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { FavoriteCardStateModel } from "./favorite-card.model";
+import { FavoriteCardStateModel } from "./favorite-card.state";
 
 const selectFavoriteCardStore = createFeatureSelector<FavoriteCardStateModel>('favoriteCards');
 

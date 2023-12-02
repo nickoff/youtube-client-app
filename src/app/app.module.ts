@@ -8,9 +8,8 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/material/material.module';
-import { SearchEffect } from './redux/search/search.effect';
-import { YouTubeEffect } from './redux/youtube/youtube.effect';
-import { metaReducers, reducers } from './redux/root.reducer';
+import { metaReducers, reducers } from './store/root-reducer';
+import { effects } from './store/root-effect';
 
 
 @NgModule({
@@ -24,7 +23,7 @@ import { metaReducers, reducers } from './redux/root.reducer';
     MaterialModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([SearchEffect, YouTubeEffect]),
+    EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [],

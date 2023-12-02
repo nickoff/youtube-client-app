@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FavoritePageComponent } from './favorite-page.component';
+import { FavoritePageComponent } from './favorite.component';
 
 describe('FavoritePageComponent', () => {
   let component: FavoritePageComponent;

@@ -1,18 +1,17 @@
 import { createReducer, on } from "@ngrx/store";
-import { FavoriteCardStateModel, FavoriteCardState } from "./favorite-card.model";
-import * as FavoriteCardActions from "./favorite-card.action";
+import { FAVORITE_CARD_ACTIONS, FavoriteCardStateModel, FavoriteCardState } from "./index";
 
 export const favoriteCardReducer = createReducer<FavoriteCardStateModel>(
   FavoriteCardState,
   on(
-    FavoriteCardActions.addFavoriteCard,
+    FAVORITE_CARD_ACTIONS.addFavoriteCard,
     (state, { favoriteCard }): FavoriteCardStateModel => [
       ...state,
       favoriteCard
     ]
   ),
   on(
-    FavoriteCardActions.deleteFavoriteCard,
+    FAVORITE_CARD_ACTIONS.deleteFavoriteCard,
     (state, { id }): FavoriteCardStateModel => state.filter(item => item.id !== id)
   )
 );

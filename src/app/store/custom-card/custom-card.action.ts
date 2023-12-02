@@ -1,12 +1,13 @@
 import { createAction, props } from '@ngrx/store';
-import { CustomCard } from './custom-card-state.model';
+import { CustomCard } from './custom-card.state';
+import { CUSTOM_CARD_TYPES } from './custom-card.types';
 
 export const addCustomCard = createAction(
-  '[Admin page] add Custom Card',
+  CUSTOM_CARD_TYPES.ADD,
   props<{ customCard: CustomCard }>()
 );
 
 export const deleteCustomCard = createAction(
-  '[Custom Card] delete Custom Card',
+  CUSTOM_CARD_TYPES.DELETE,
   props<{ id: string }>()
 );

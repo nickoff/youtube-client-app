@@ -1,6 +1,6 @@
 import { MemoizedSelector, createFeatureSelector, createSelector } from "@ngrx/store";
 import { CardItem } from "src/app/youtube/models";
-import { YouTubeAPIStateModel } from "../root-state.models";
+import { YouTubeAPIStateModel } from "./youtube.state";
 
 const selectYoutubeStore = createFeatureSelector<YouTubeAPIStateModel>('youtubeCards');
 

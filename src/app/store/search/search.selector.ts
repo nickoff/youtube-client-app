@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { SearchStateModel } from "./search-state.model";
+import { SearchStateModel } from "./search.state";
 
 const selectSearchStore = createFeatureSelector<SearchStateModel>('searchQuery');
 

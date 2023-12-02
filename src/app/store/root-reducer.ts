@@ -1,5 +1,5 @@
 import { ActionReducerMap, MetaReducer } from "@ngrx/store";
-import { State } from "./root-state.models";
+import { State } from "./root-state";
 import { searchReducer } from "./search/search.reducer";
 import { youTubeApiReducer } from "./youtube/youtube.reducer";
 import { customCardReducer } from "./custom-card/custom-card.reducer";
