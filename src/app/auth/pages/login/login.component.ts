@@ -57,43 +57,54 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  getShowEmailError(): boolean {
+  onSubmit(): void {
+    this.isSubmitted = true;
+    this.refreshErrorsState();
+
+    if (!this.credentials.valid) return;
+
+    this.authStateService.authenticate();
+    localStorage.setItem(TOKEN_KEY, TOKEN_VALUE);
+    this.navigateService.navigateToRoot();
+  }
+
+  private getShowEmailError(): boolean {
     return this.email.errors !== null
       && this.email.errors && (this.email.dirty || this.isSubmitted);
   }
 
-  getEmailErrors(): string {
+  private getEmailErrors(): string {
     return this.email.errors !== null
       && ((this.email.errors[AuthEmailErrors.invalidEmail] && ERROR_EMAIL_MESSAGE.email)
         || (this.email.errors[AuthEmailErrors.required] && ERROR_EMAIL_MESSAGE.required));
   }
 
-  getShowPasswordError(): boolean {
+  private getShowPasswordError(): boolean {
     return this.password.errors !== null
       && this.password.errors && (this.password.dirty
         || this.isSubmitted);
   }
 
-  getShowNonRequiredPasswordErrors(): boolean {
+  private getShowNonRequiredPasswordErrors(): boolean {
     return this.password.errors !== null
       && this.password.errors
       && !this.password.errors[AuthPasswordErrors.required]
       && this.password.dirty;
   }
 
-  getPasswordErrors(): string {
+  private getPasswordErrors(): string {
     return this.password.errors !== null
       && ((this.password.errors[AuthPasswordErrors.required] && ERROR_PASSWORD_MESSAGE.required)
         || (this.password.errors && ERROR_PASSWORD_MESSAGE.validatePasswordStrength));
   }
 
-  getPasswordErrorKeys(): string[] {
+  private getPasswordErrorKeys(): string[] {
     return this.password.errors
       ? Object.keys(this.password.errors)
       : [];
   }
 
-  getNonRequiredPasswordError(): ValidationErrors | undefined {
+  private getNonRequiredPasswordError(): ValidationErrors | undefined {
     return this.password.errors ?? undefined;
   }
 
@@ -105,16 +116,5 @@ export class LoginComponent implements OnInit {
     this.passwordErrors = this.getPasswordErrors();
     this.isShowNonRequiredPasswordErrors = this.getShowNonRequiredPasswordErrors();
     this.nonRequiredPasswordError = this.getNonRequiredPasswordError();
-  }
-
-  onSubmit(): void {
-    this.isSubmitted = true;
-    this.refreshErrorsState();
-
-    if (!this.credentials.valid) return;
-
-    this.authStateService.authenticate();
-    localStorage.setItem(TOKEN_KEY, TOKEN_VALUE);
-    this.navigateService.navigateToRoot();
   }
 }

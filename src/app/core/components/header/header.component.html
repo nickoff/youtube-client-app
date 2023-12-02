@@ -2,9 +2,7 @@
   <div class="header-wrapper">
     <div class="header-container">
       <nav class="header-nav">
-        <a routerLink="list-page" routerLinkActive="active-link">Main</a>
-        <a routerLink="favorites" routerLinkActive="active-link">Favorites</a>
-        <a routerLink="auth/admin" routerLinkActive="active-link">Admin</a>
+        <a *ngFor="let item of navMenuList" [routerLink]="item.link" routerLinkActive="active-link">{{ item.name }}</a>
       </nav>
       <div class="search-container">
         <app-logo></app-logo>

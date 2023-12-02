@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectIsLoadingCustomCardList } from 'src/app/redux/custom-card/custom-card.selector';
+import { selectIsLoadingCustomCardList } from 'src/app/store/custom-card/custom-card.selector';
 
 @Component({
   selector: 'app-list-page',
@@ -9,7 +9,7 @@ import { selectIsLoadingCustomCardList } from 'src/app/redux/custom-card/custom-
   styleUrls: ['./list-page.component.scss']
 })
 export class ListPageComponent implements OnInit {
-  isLoadingCustomCardList$?:Observable<boolean>;
+  isLoadingCustomCardList$?: Observable<boolean>;
   isLoadingSearchResults = false;
 
   constructor(private store: Store) { }

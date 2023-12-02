@@ -1,3 +1,4 @@
+/* eslint-disable @ngrx/avoid-mapping-selectors */
 import {
   Component,
   OnInit
@@ -6,7 +7,7 @@ import { SortDateService } from 'src/app/youtube/services/sort-data/sort-data.se
 import { SortByWordService } from 'src/app/youtube/services/sort-word/sort-by-word.service';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { selectVideosInfo } from 'src/app/redux/youtube/youtube.selector';
+import { selectVideosInfo } from 'src/app/store/youtube/youtube.selector';
 import { SortCountOfViewService } from '../../services/sort-count-of-view/sort-count-of-view.service';
 import { CardItemModel } from '../../../shared/models/card-item.model';
 import { CardItem } from '../../models';
@@ -18,6 +19,7 @@ import { CardItem } from '../../models';
 })
 export class SearchResultsComponent implements OnInit {
   items$?: Observable<CardItemModel[]>;
+  search$?: Observable<string>;
   sortDateOrder = this.sortDateService.sortDateOrder$;
   sortCountOfViewOrder = this.sortCountOfViewService.sortCountOfViewOrder$;
   inputData = this.sortByWordService.inputData$;
@@ -28,6 +30,12 @@ export class SearchResultsComponent implements OnInit {
     private sortByWordService: SortByWordService,
     private store: Store
   ) { }
+
+  ngOnInit(): void {
+    this.items$ = this.store.select(selectVideosInfo).pipe(
+      map(items => items.map(this.transformDate))
+    );
+  }
 
   private transformDate = (item: CardItem): CardItemModel => ({
     id: item.id,
@@ -40,9 +48,4 @@ export class SearchResultsComponent implements OnInit {
     isActions: true,
     statistics: item.statistics
   });
-  ngOnInit(): void {
-    this.items$ = this.store.select(selectVideosInfo).pipe(
-      map(items => items.map(this.transformDate))
-    );
-  }
 }

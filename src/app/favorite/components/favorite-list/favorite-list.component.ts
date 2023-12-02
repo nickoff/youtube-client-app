@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectFavoriteCards } from 'src/app/redux/favorite-card/favorite-card.selector';
+import { selectFavoriteCards } from 'src/app/store/favorite-card/favorite-card.selector';
 import { CardItemModel } from 'src/app/shared/models/card-item.model';
 import { SortCountOfViewService } from 'src/app/youtube/services/sort-count-of-view/sort-count-of-view.service';
 import { SortDateService } from 'src/app/youtube/services/sort-data/sort-data.service';

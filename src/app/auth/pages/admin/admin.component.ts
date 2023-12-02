@@ -5,10 +5,10 @@ import {
   FormArray, FormControl, FormGroup, Validators
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { CustomCard } from 'src/app/redux/custom-card';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CustomCard } from '../../../store/custom-card/custom-card.state';
 import { NavigateService } from '../../../core/services/navigate/navigate.service';
-import * as AdminActions from '../../../redux/custom-card/custom-card.action';
+import * as AdminActions from '../../../store/custom-card/custom-card.action';
 import { validateDateNotFuture } from '../../services/validate-date-not-future.service';
 import { AdminModel } from '../../models';
 import { AdminFormErrors } from '../../enums';
@@ -70,46 +70,6 @@ export class AdminComponent implements OnInit {
       });
   }
 
-  getShowError(formControl: FormControl | FormArray): boolean {
-    return formControl.errors !== null
-      && formControl.errors && (formControl.dirty || this.isSubmitted);
-  }
-
-  getShowTagsError(): boolean {
-    return this.tags.invalid
-      && (this.tags.invalid && (this.tags.dirty || this.isSubmitted));
-  }
-
-  getTitleError(): string | undefined {
-    return (this.title.errors?.[AdminFormErrors.minlength]
-      && ERROR_ADMIN_FORM_MESSAGE.minlength.title)
-      || (this.title.errors?.[AdminFormErrors.maxlength]
-      && ERROR_ADMIN_FORM_MESSAGE.maxlength.title)
-      || (this.title.errors?.[AdminFormErrors.required]
-      && ERROR_ADMIN_FORM_MESSAGE.required.title);
-  }
-
-  getDescriptionError(): string | undefined {
-    return this.description.errors?.[AdminFormErrors.maxlength]
-      && ERROR_ADMIN_FORM_MESSAGE.maxlength.description;
-  }
-
-  getImgError(): string | undefined {
-    return this.img.errors?.[AdminFormErrors.required] && ERROR_ADMIN_FORM_MESSAGE.required.img;
-  }
-
-  getLinkVideoError(): string | undefined {
-    return this.linkVideo.errors?.[AdminFormErrors.required]
-      && ERROR_ADMIN_FORM_MESSAGE.required.linkVideo;
-  }
-
-  getCreationDateError(): string | undefined {
-    return (this.creationDate.errors?.[AdminFormErrors.dateNotFuture]
-      && ERROR_ADMIN_FORM_MESSAGE.dateNotFuture)
-      || (this.creationDate.errors?.[AdminFormErrors.required]
-        && ERROR_ADMIN_FORM_MESSAGE.required.creationDate);
-  }
-
   onSubmit(): void {
     this.isSubmitted = true;
     this.refreshErrorsState();
@@ -128,15 +88,55 @@ export class AdminComponent implements OnInit {
     this.tags.push(this.createTag());
   }
 
-  createTag(): FormControl {
-    const tag = new FormControl('', [Validators.required]);
-    return tag;
-  }
-
   addTag(): void {
     if (this.tags.length >= this.maxCountTags
       || !this.tags.valid) return;
     this.tags.push(this.createTag());
+  }
+
+  private getShowError(formControl: FormControl | FormArray): boolean {
+    return formControl.errors !== null
+      && formControl.errors && (formControl.dirty || this.isSubmitted);
+  }
+
+  private getShowTagsError(): boolean {
+    return this.tags.invalid
+      && (this.tags.invalid && (this.tags.dirty || this.isSubmitted));
+  }
+
+  private getTitleError(): string | undefined {
+    return (this.title.errors?.[AdminFormErrors.minlength]
+      && ERROR_ADMIN_FORM_MESSAGE.minlength.title)
+      || (this.title.errors?.[AdminFormErrors.maxlength]
+        && ERROR_ADMIN_FORM_MESSAGE.maxlength.title)
+      || (this.title.errors?.[AdminFormErrors.required]
+        && ERROR_ADMIN_FORM_MESSAGE.required.title);
+  }
+
+  private getDescriptionError(): string | undefined {
+    return this.description.errors?.[AdminFormErrors.maxlength]
+      && ERROR_ADMIN_FORM_MESSAGE.maxlength.description;
+  }
+
+  private getImgError(): string | undefined {
+    return this.img.errors?.[AdminFormErrors.required] && ERROR_ADMIN_FORM_MESSAGE.required.img;
+  }
+
+  private getLinkVideoError(): string | undefined {
+    return this.linkVideo.errors?.[AdminFormErrors.required]
+      && ERROR_ADMIN_FORM_MESSAGE.required.linkVideo;
+  }
+
+  private getCreationDateError(): string | undefined {
+    return (this.creationDate.errors?.[AdminFormErrors.dateNotFuture]
+      && ERROR_ADMIN_FORM_MESSAGE.dateNotFuture)
+      || (this.creationDate.errors?.[AdminFormErrors.required]
+        && ERROR_ADMIN_FORM_MESSAGE.required.creationDate);
+  }
+
+  private createTag(): FormControl {
+    const tag = new FormControl('', [Validators.required]);
+    return tag;
   }
 
   private refreshErrorsState(): void {
