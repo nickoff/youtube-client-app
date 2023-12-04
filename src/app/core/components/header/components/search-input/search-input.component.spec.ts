@@ -2,14 +2,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { Store } from '@ngrx/store';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { NavigateService } from 'src/app/core/services/navigate/navigate.service';
 import { SearchInputComponent } from './search-input.component';
 
 describe('SearchInputComponent', () => {
+  const initialState = '';
   let component: SearchInputComponent;
   let fixture: ComponentFixture<SearchInputComponent>;
-  let store: Store;
+  let store: MockStore;
   let navigateService: NavigateService;
 
   beforeEach(async () => {
@@ -20,7 +21,7 @@ describe('SearchInputComponent', () => {
       imports: [ReactiveFormsModule],
       declarations: [SearchInputComponent],
       providers: [
-        { provide: Store, useValue: store },
+        provideMockStore({ initialState }),
         { provide: NavigateService, useValue: navigateService }
       ]
     }).compileComponents();
@@ -28,6 +29,8 @@ describe('SearchInputComponent', () => {
     fixture = TestBed.createComponent(SearchInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    store = TestBed.inject(MockStore);
+    store.dispatch = jest.fn();
   });
 
   it('should create', () => {
