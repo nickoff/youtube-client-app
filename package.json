@@ -10,7 +10,7 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "ng lint",
-    "deploy": "ng deploy --base-href=https://rolling-scopes-school.github.io/nickoff-ANGULAR2023Q4/"
+    "deploy": "ng deploy --base-href=https://nickoff.github.io/youtube-client-app/"
   },
   "private": true,
   "dependencies": {
